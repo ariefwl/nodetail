@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind CSS | Node.js</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="bg-gray-100">
+    <!-- <%- include('header'); %> -->
+
+      <div class="container mx-auto p-8">
+        <h1 class="text-3xl font-bold mb-8 text-center">Daftar Mahasiswa</h1>
+        <a href="/mhs/new" class="bg-blue-500 text-white px-4 py-2 rounded">Tambah data</a>
+        <table class="min-w-full mt-6 bg-white">
+          <thead>
+            <tr>
+              <th class="border px-4 py-2">No.</th>
+              <th class="border px-4 py-2">Nama Mahasiswa</th>
+              <th class="border px-4 py-2">Jurusan</th>
+              <th class="border px-4 py-2">Telepon</th>
+              <th class="border px-4 py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% mhs.forEach((items, no) => { %>
+              <tr>
+                <td class="border px-4 py-2"><%= no + 1 %></td>
+                <td class="border px-4 py-2"><%= items.name %></td>
+                <td class="border px-4 py-2"><%= items.jurusan %></td>
+                <td class="border px-4 py-2"><%= items.telepon %></td>
+                <td class="border px-4 py-2">
+                  <a href="/mhs/<%= items.id %>/edit" class="text-blue-500">Edit</a> |
+                  <form action="/mhs/<%= items.id %>?_method=DELETE" method="POST" style="display: inline;" onsubmit="return confirmDelete(this);">
+                    <button class="text-red-500">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+
+    <!-- <%- include('footer'); %> -->
+
+    <script>
+      // Fungsi untuk menampilkan konfirmasi sebelum menghapus data
+      function confirmDelete(form) {
+        if (confirm("Yakin akan menghapus data ini ?")) {
+          form.submit(); // Submit form jika user mengonfirmasi
+        } else {
+          return false; // Jangan lakukan apa-apa jika user membatalkan
+        }
+      }
+    </script>
+</body>
+</html>
