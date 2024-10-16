@@ -1,23 +1,8 @@
 const express = require("express");
 const app = express();
-// const helmet = require('helmet');
 const methodOverride = require('method-override');
 const path = require("path");
 const router = require('./routers/router');
-// const conn = require('./config/db');
-
-// Konfigurasi Helmet untuk mengizinkan unsafe-eval
-// app.use(
-//     helmet({
-//       contentSecurityPolicy: {
-//         directives: {
-//           defaultSrc: ["'self'"],
-//           scriptSrc: ["'self'", "'unsafe-eval'"], // Menambahkan 'unsafe-eval'
-//         },
-//       },
-//     })
-//   );
-
 
 // Override method POST dengan query _method
 app.use(methodOverride('_method'));
